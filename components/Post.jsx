@@ -46,7 +46,7 @@ const Post = ({ post, key, compact }) => {
                     </Link>
 
                     <div className="flex items-center">
-                        <img
+                        <Image
                             // src={post.frontmatter.author_image} //! Not working on production
                             src={post.frontmatter.cover_image}
                             alt="author_image"
