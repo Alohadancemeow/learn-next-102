@@ -4,15 +4,16 @@ import Image from 'next/image'
 
 const Header = () => {
     return (
-        <header className="bg-gray-900 text-gray-100 shadow w-full">
-            <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+        <header className="w-full text-gray-100 bg-gray-900 shadow">
+            <div className="container flex flex-col flex-wrap items-center p-5 mx-auto md:flex-row">
                 <Link href="/">
-                    <a className="flex md:w-1/5 title-font font-medium items-center md:justify-start mb-4 md:mb-0">
+                    <a className="flex items-center mb-4 font-medium md:w-1/5 title-font md:justify-start md:mb-0">
                         <Image
-                            src="/favicon.ico"
+                            src="/images/image1.jpg"
                             alt="logo"
                             width={40}
                             height={40}
+                            className="rounded-full"
                         />
                         <span className="ml-3 text-xl">
                             My Blog
@@ -20,12 +21,12 @@ const Header = () => {
                     </a>
                 </Link>
 
-                <nav className="flex flex-wrap md:w-4/5 items-center justify-end text-base md:ml-auto">
+                <nav className="flex flex-wrap items-center justify-end text-base md:w-4/5 md:ml-auto">
                     <Link href="/blog">
-                        <a className="mx-5 cursor-pointer uppercase hover:text-indigo-300">Blog</a>
+                        <a className="mx-5 uppercase cursor-pointer hover:text-indigo-300">Blog</a>
                     </Link>
                     <Link href="/about">
-                        <a className="mx-5 cursor-pointer uppercase hover:text-indigo-300">About</a>
+                        <a className="mx-5 uppercase cursor-pointer hover:text-indigo-300">About</a>
                     </Link>
                 </nav>
             </div>
