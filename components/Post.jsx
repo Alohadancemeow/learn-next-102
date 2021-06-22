@@ -47,8 +47,11 @@ const Post = ({ post, key, compact }) => {
 
                     <div className="flex items-center">
                         <img
-                            src={post.frontmatter.author_image}
+                            // src={post.frontmatter.author_image} //! Not working on production
+                            src={post.frontmatter.cover_image}
                             alt="author_image"
+                            width={40}
+                            height={40}
                             className="hidden object-cover w-10 h-10 mx-4 rounded-full sm:block"
                         />
                         <h3 className="font-bold text-gray-700">
