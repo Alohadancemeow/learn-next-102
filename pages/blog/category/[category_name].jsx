@@ -1,10 +1,10 @@
 import fs from "fs"
 import path from "path"
 import matter from 'gray-matter'
-import Link from 'next/link'
+
 import Layout from "../../../components/Layout"
 import Post from "../../../components/Post"
-import { sortByDate } from '../../../utils'
+import { getPosts } from '../../../lib/posts'
 
 export default function CategoryPage({ posts, categoryName }) {
 
@@ -29,8 +29,8 @@ export default function CategoryPage({ posts, categoryName }) {
 }
 
 export const getStaticPaths = async () => {
+    
     const files = fs.readdirSync(path.join('posts'))
-
     const category = files.map(filename => {
         const markdownWithMeta = fs.readFileSync(
             path.join('posts', filename),
@@ -41,7 +41,7 @@ export const getStaticPaths = async () => {
         return frontmatter.category.toLowerCase()
     })
 
-    console.log(category);
+    // console.log(category);
 
     const paths = category.map(category => ({
         params: {
@@ -63,25 +63,8 @@ export const getStaticProps = async ({ params: { category_name } }) => {
     // Read post's path [.md]
     const files = fs.readdirSync(path.join('posts'))
 
-    const posts = files.map((filename) => {
-
-        const slug = filename.replace('.md', '')
-
-        // Read files
-        const markdownWithMeta = fs.readFileSync(
-            path.join('posts', filename),
-            'utf-8'
-        )
-
-        // Extract slug - header
-        const { data: frontmatter } = matter(markdownWithMeta)
-
-        return {
-            slug,
-            frontmatter
-        }
-
-    })
+    // Call getPosts
+    const posts = getPosts()
 
     // Filter posts by category
     const categoryPosts = posts.filter(post => {
@@ -90,9 +73,8 @@ export const getStaticProps = async ({ params: { category_name } }) => {
 
     return {
         props: {
-            posts: categoryPosts.sort(sortByDate),
+            posts: categoryPosts,
             categoryName: category_name,
-
         }
     }
 }
