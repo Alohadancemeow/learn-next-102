@@ -6,10 +6,12 @@ import matter from 'gray-matter'
 
 export default function handler(req, res) {
 
+  // # This variable for saving results.
   let posts
 
   if (process.env.NODE_ENV === 'production') {
     // todo: fetch from cache
+    posts = require('../../cache/data').posts
 
   } else {
     // Read paths
